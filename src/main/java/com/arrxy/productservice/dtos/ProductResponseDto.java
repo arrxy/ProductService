@@ -1,5 +1,6 @@
 package com.arrxy.productservice.dtos;
 
+import com.arrxy.productservice.models.ProductModel;
 import lombok.Data;
 import lombok.Getter;
 
@@ -9,16 +10,12 @@ public class ProductResponseDto {
     private String name;
     private String description;
     private double price;
-    private int quantity;
 
-    public ProductResponseDto() {
+    public static ProductResponseDto fromProduct(ProductModel productModel) {
+        ProductResponseDto productResponseDto = new ProductResponseDto();
+        productResponseDto.setName(productModel.getName());
+        productResponseDto.setDescription(productModel.getDescription());
+        productResponseDto.setPrice(productModel.getPrice());
+        return productResponseDto;
     }
-
-    public ProductResponseDto(String name, String description, double price, int quantity) {
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.quantity = quantity;
-    }
-
 }

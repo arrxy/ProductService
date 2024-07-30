@@ -1,10 +1,12 @@
 package com.arrxy.productservice.controllers;
 import com.arrxy.productservice.dtos.ProductRequestDto;
+import com.arrxy.productservice.dtos.ProductResponseDto;
+import com.arrxy.productservice.models.ProductModel;
 import com.arrxy.productservice.services.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/products")
@@ -16,11 +18,8 @@ public class ProductController {
     }
 
     @GetMapping("/all")
-    public ArrayList<String> getProducts() {
-        String products = "products";
-        ArrayList<String> productsList = new ArrayList<>();
-        productsList.add(products);
-        return productsList;
+    public List<ProductResponseDto> getProducts() {
+        return productService.getProducts().stream().map(ProductResponseDto::fromProduct).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
@@ -29,8 +28,8 @@ public class ProductController {
     }
 
     @PostMapping
-    public String addProduct(@RequestBody ProductRequestDto productRequestDto) {
-        return "products";
+    public ProductModel addProduct(@RequestBody ProductRequestDto productRequestDto) {
+        return productService.addProduct(productRequestDto.toProduct());
     }
 
     @PutMapping("/delete")

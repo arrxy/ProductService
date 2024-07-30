@@ -4,8 +4,9 @@ import com.arrxy.productservice.models.ProductModel;
 import lombok.Data;
 
 @Data
-public class ProductRequestDto {
-    private String name;
+public class FakeStoreCreateProductResponseDto {
+    private Integer id;
+    private String title;
     private String description;
     private double price;
     private String imageUrl;
@@ -13,7 +14,7 @@ public class ProductRequestDto {
 
     public ProductModel toProduct() {
         ProductModel productModel = new ProductModel();
-        productModel.setName(name);
+        productModel.setName(title);
         productModel.setDescription(description);
         productModel.setPrice(price);
         productModel.setImageUrl(imageUrl);
