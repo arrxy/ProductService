@@ -3,7 +3,7 @@ package com.arrxy.productservice.models;
 import lombok.Data;
 
 @Data
-public class ProductModel {
+public class Product {
     private String name;
     private String description;
     private double price;

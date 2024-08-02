@@ -1,7 +1,7 @@
 package com.arrxy.productservice.controllers;
 import com.arrxy.productservice.dtos.ProductRequestDto;
 import com.arrxy.productservice.dtos.ProductResponseDto;
-import com.arrxy.productservice.models.ProductModel;
+import com.arrxy.productservice.models.Product;
 import com.arrxy.productservice.services.ProductService;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,7 +28,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ProductModel addProduct(@RequestBody ProductRequestDto productRequestDto) {
+    public Product addProduct(@RequestBody ProductRequestDto productRequestDto) {
         return productService.addProduct(productRequestDto.toProduct());
     }
 

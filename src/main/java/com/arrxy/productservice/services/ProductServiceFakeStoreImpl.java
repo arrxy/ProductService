@@ -1,8 +1,8 @@
 package com.arrxy.productservice.services;
 
+import com.arrxy.productservice.dtos.FakeStoreCreateProductRequestDto;
 import com.arrxy.productservice.dtos.FakeStoreCreateProductResponseDto;
-import com.arrxy.productservice.dtos.ProductResponseDto;
-import com.arrxy.productservice.models.ProductModel;
+import com.arrxy.productservice.models.Product;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -26,25 +26,25 @@ public class ProductServiceFakeStoreImpl implements ProductService {
 //        return restTemplate.getForEntity("https://fakestoreapi.com/products", new ParameterizedTypeReference<ArrayList<ProductResponseDto>>() {});
 //    }
 
-    public ArrayList<ProductModel> getProducts() {
-        ResponseEntity<List<ProductModel>> response = restTemplate.exchange(
+    public ArrayList<Product> getProducts() {
+        ResponseEntity<List<Product>> response = restTemplate.exchange(
                 "https://fakestoreapi.com/products",
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<>() {
                 }
         );
-        return (ArrayList<ProductModel>) response.getBody();
+        return (ArrayList<Product>) response.getBody();
     }
 
     @Override
     public String getProductById(String id) {
-        return "products";
+        return null;
     }
 
     @Override
-    public ProductModel addProduct(ProductModel product) {
-        HttpEntity<ProductModel> request = new HttpEntity<>(product);
+    public Product addProduct(Product product) {
+        HttpEntity<FakeStoreCreateProductRequestDto> request = new HttpEntity<>(FakeStoreCreateProductRequestDto.fromProduct(product));
         var res = Objects.requireNonNull(restTemplate.exchange(
                 "https://fakestoreapi.com/products",
                 HttpMethod.POST,

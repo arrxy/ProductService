@@ -1,13 +1,12 @@
 package com.arrxy.productservice.services;
 
-import com.arrxy.productservice.dtos.ProductResponseDto;
-import com.arrxy.productservice.models.ProductModel;
+import com.arrxy.productservice.models.Product;
 
 import java.util.ArrayList;
 
 public interface ProductService {
-    ArrayList<ProductModel> getProducts();
+    ArrayList<Product> getProducts();
     String getProductById(String id);
-    ProductModel addProduct(ProductModel product);
+    Product addProduct(Product product);
     String deleteProduct();
 }
