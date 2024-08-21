@@ -10,7 +10,7 @@ public class FakeStoreCreateProductResponseDto {
     private String description;
     private double price;
     private String imageUrl;
-    private String category;
+//    private String category;
 
     public Product toProduct() {
         Product product = new Product();
@@ -18,7 +18,7 @@ public class FakeStoreCreateProductResponseDto {
         product.setDescription(description);
         product.setPrice(price);
         product.setImageUrl(imageUrl);
-        product.setCategory(category);
+//        product.setCategory(category);
         return product;
     }
 }

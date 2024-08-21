@@ -10,7 +10,7 @@ public class FakeStoreCreateProductRequestDto {
     private String description;
     private double price;
     private String imageUrl;
-    private String category;
+//    private String category;
 
     public static FakeStoreCreateProductRequestDto fromProduct(Product product) {
         FakeStoreCreateProductRequestDto fakeStoreCreateProductRequestDto = new FakeStoreCreateProductRequestDto();
@@ -18,7 +18,7 @@ public class FakeStoreCreateProductRequestDto {
         fakeStoreCreateProductRequestDto.setDescription(product.getDescription());
         fakeStoreCreateProductRequestDto.setPrice(product.getPrice());
         fakeStoreCreateProductRequestDto.setImageUrl(product.getImageUrl());
-        fakeStoreCreateProductRequestDto.setCategory(product.getCategory());
+//        fakeStoreCreateProductRequestDto.setCategory(product.getCategory());
         return fakeStoreCreateProductRequestDto;
     }
 }

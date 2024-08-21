@@ -1,5 +1,6 @@
 package com.arrxy.productservice.dtos;
 
+import com.arrxy.productservice.models.Category;
 import com.arrxy.productservice.models.Product;
 import lombok.Data;
 
@@ -9,7 +10,7 @@ public class ProductRequestDto {
     private String description;
     private double price;
     private String imageUrl;
-    private String category;
+    private Category category;
 
     public Product toProduct() {
         Product product = new Product();
