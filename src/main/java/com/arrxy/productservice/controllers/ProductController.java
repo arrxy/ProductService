@@ -1,8 +1,10 @@
 package com.arrxy.productservice.controllers;
 import com.arrxy.productservice.dtos.ProductRequestDto;
 import com.arrxy.productservice.dtos.ProductResponseDto;
+import com.arrxy.productservice.exceptions.CategoryNotPresentException;
 import com.arrxy.productservice.models.Product;
 import com.arrxy.productservice.services.ProductService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,7 +15,7 @@ import java.util.stream.Collectors;
 public class ProductController {
     private ProductService productService;
 
-    ProductController(ProductService productService) {
+    ProductController(@Qualifier("productServiceDBImpl") ProductService productService) {
         this.productService = productService;
     }
 
@@ -28,7 +30,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public Product addProduct(@RequestBody ProductRequestDto productRequestDto) {
+    public Product addProduct(@RequestBody ProductRequestDto productRequestDto) throws CategoryNotPresentException {
         return productService.addProduct(productRequestDto.toProduct());
     }
 

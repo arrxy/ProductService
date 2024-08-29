@@ -3,6 +3,7 @@ package com.arrxy.productservice.services;
 import com.arrxy.productservice.dtos.FakeStoreCreateProductRequestDto;
 import com.arrxy.productservice.dtos.FakeStoreCreateProductResponseDto;
 import com.arrxy.productservice.models.Product;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -15,9 +16,10 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
+@Qualifier("productServiceFakeStoreImpl")
 public class ProductServiceFakeStoreImpl implements ProductService {
 
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
     public ProductServiceFakeStoreImpl(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
@@ -38,7 +40,7 @@ public class ProductServiceFakeStoreImpl implements ProductService {
     }
 
     @Override
-    public String getProductById(String id) {
+    public Product getProductById(String id) {
         return null;
     }
 
