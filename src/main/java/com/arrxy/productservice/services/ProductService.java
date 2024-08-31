@@ -11,5 +11,6 @@ public interface ProductService {
     List<Product> getProducts();
     Product getProductById(String id) throws ProductNotFoundException;
     Product addProduct(Product product) throws CategoryNotPresentException;
+    Product partialUpdateProduct(Product product, Long id) throws ProductNotFoundException;
     String deleteProduct();
 }

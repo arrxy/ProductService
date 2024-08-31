@@ -2,6 +2,7 @@ package com.arrxy.productservice.services;
 
 import com.arrxy.productservice.dtos.FakeStoreCreateProductRequestDto;
 import com.arrxy.productservice.dtos.FakeStoreCreateProductResponseDto;
+import com.arrxy.productservice.exceptions.ProductNotFoundException;
 import com.arrxy.productservice.models.Product;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.ParameterizedTypeReference;
@@ -54,6 +55,11 @@ public class ProductServiceFakeStoreImpl implements ProductService {
                 FakeStoreCreateProductResponseDto.class
         ).getBody());
         return res.toProduct();
+    }
+
+    @Override
+    public Product partialUpdateProduct(Product product, Long id) throws ProductNotFoundException {
+        return null;
     }
 
     @Override

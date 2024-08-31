@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @Service
 @Qualifier("productServiceDBImpl")
-public class ProductServiceDBImpl implements ProductService{
+public class ProductServiceDBImpl implements ProductService {
 
     private final CategoryRepository categoryRepository;
     private final ProductRepository productRepository;
@@ -25,6 +25,7 @@ public class ProductServiceDBImpl implements ProductService{
         this.categoryRepository = categoryRepository;
         this.productRepository = productRepository;
     }
+
     @Override
     public List<Product> getProducts() {
         return productRepository.findAll();
@@ -46,12 +47,46 @@ public class ProductServiceDBImpl implements ProductService{
         if (categoryName == null) {
             throw new CategoryNotPresentException();
         }
+        product.setCategory(getOrSetProductCategory(categoryName));
+        return productRepository.save(product);
+    }
+
+    public Product partialUpdateProduct(Product product, Long id) throws ProductNotFoundException {
+        Optional<Product> productOptional = productRepository.findById(id);
+        if (productOptional.isEmpty()) {
+            throw new ProductNotFoundException();
+        }
+        Product productFromDB = productOptional.get();
+        product.setId(id);
+        if (product.getName() != null) {
+            productFromDB.setName(product.getName());
+        }
+        if (product.getPrice() != null) {
+            productFromDB.setPrice(product.getPrice());
+        }
+        if (product.getCategory() != null && product.getCategory().getName() != null) {
+            productFromDB.setCategory(getOrSetProductCategory(product.getCategory().getName()));
+        }
+        if (product.getDescription() != null) {
+            productFromDB.setDescription(product.getDescription());
+        }
+        if (product.getQuantity() != null) {
+            productFromDB.setQuantity(product.getQuantity());
+        }
+        if (product.getQuantity() != null) {
+            productFromDB.setQuantity(product.getQuantity());
+        }
+        return productRepository.save(productFromDB);
+    }
+
+    private Category getOrSetProductCategory(String categoryName) {
         Optional<Category> category = categoryRepository.findCategoryByName(categoryName);
         if (category.isEmpty()) {
-            category = Optional.ofNullable(categoryRepository.save(product.getCategory()));
+            Category newCategory = new Category();
+            newCategory.setName(categoryName);
+            return categoryRepository.save(newCategory);
         }
-        product.setCategory(category.get());
-        return productRepository.save(product);
+        return category.get();
     }
 
     @Override

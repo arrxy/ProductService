@@ -2,6 +2,7 @@ package com.arrxy.productservice.controllers;
 import com.arrxy.productservice.dtos.ProductRequestDto;
 import com.arrxy.productservice.dtos.ProductResponseDto;
 import com.arrxy.productservice.exceptions.CategoryNotPresentException;
+import com.arrxy.productservice.exceptions.ProductNotFoundException;
 import com.arrxy.productservice.models.Product;
 import com.arrxy.productservice.services.ProductService;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -30,8 +31,13 @@ public class ProductController {
     }
 
     @PostMapping
-    public Product addProduct(@RequestBody ProductRequestDto productRequestDto) throws CategoryNotPresentException {
-        return productService.addProduct(productRequestDto.toProduct());
+    public ProductResponseDto addProduct(@RequestBody ProductRequestDto productRequestDto) throws CategoryNotPresentException {
+        return ProductResponseDto.fromProduct(productService.addProduct(productRequestDto.toProduct()));
+    }
+
+    @PatchMapping("{id}/update")
+    public ProductResponseDto updateProduct(@RequestBody ProductRequestDto product, @PathVariable("id") Long id) throws ProductNotFoundException {
+        return ProductResponseDto.fromProduct(productService.partialUpdateProduct(product.toProduct(), id));
     }
 
     @PutMapping("/delete")
