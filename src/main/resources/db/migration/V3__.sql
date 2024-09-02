@@ -1,0 +1,1 @@
+ALTER TABLE product_service.product ADD COLUMN rating FLOAT default 0.0;
