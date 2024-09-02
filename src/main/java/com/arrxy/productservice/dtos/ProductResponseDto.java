@@ -9,7 +9,7 @@ import lombok.Getter;
 public class ProductResponseDto {
     private String name;
     private String description;
-    private double price;
+    private Double price;
 
     public static ProductResponseDto fromProduct(Product product) {
         ProductResponseDto productResponseDto = new ProductResponseDto();

@@ -8,7 +8,7 @@ import lombok.Data;
 public class ProductRequestDto {
     private String name;
     private String description;
-    private double price;
+    private Double price;
     private String imageUrl;
     private Category category;
 
